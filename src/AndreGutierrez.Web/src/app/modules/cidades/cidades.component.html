@@ -1,0 +1,94 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer-content>
+    
+    <div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Lista</mat-card-title>
+            <mat-card-subtitle>Relação das cidades cadastradas</mat-card-subtitle>
+            <mat-card-actions align="end">
+              <button mat-button (click)="onNew()">NOVO</button>
+            </mat-card-actions>
+          </mat-card-title-group>
+          
+        </mat-card-header>
+        <mat-card-content>
+
+          <table mat-table [dataSource]="cidades" style="margin-top:30px" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="nome">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="uf">
+              <th mat-header-cell *matHeaderCellDef> UF </th>
+              <td mat-cell *matCellDef="let element"> {{element.uf}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acao">
+              <th mat-header-cell *matHeaderCellDef> Ação </th>
+              <td mat-cell *matCellDef="let element">
+                <a mat-button (click)="onSelect(element)">selecionar</a>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    
+
+  </mat-drawer-content>
+
+
+  <mat-drawer appearance="raised" mode="side" position="end" style="width: 400px;" opened>
+    <div *ngIf="selectedCidade">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Cadastro</mat-card-title>
+          <mat-card-subtitle>Informe os dados da cidade</mat-card-subtitle>
+        </mat-card-header>
+
+        
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field class="example-full-width"  >
+              <mat-label>Nome da Cidade</mat-label>
+              <input id="cidade-nome" matInput placeholder="Ex. Curitiba" [(ngModel)]="selectedCidade.nome"  name="nome" >
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>UF</mat-label>
+              <mat-select [(ngModel)]="selectedCidade.uf" name="uf">
+                <mat-option *ngFor="let estado of estados" [value]="estado.uf" >
+                  {{estado.uf}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-button (click)="onDelete(selectedCidade)">Remover</button>
+          <button mat-button (click)="onSave()">Salvar</button>
+        </mat-card-actions>
+        
+      </mat-card>
+    </div>
+  </mat-drawer>
+
+</mat-drawer-container>
+
+
+
