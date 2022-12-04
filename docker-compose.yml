@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  andregutierrezweb:
+  desafio-web:
     image: ${DOCKER_REGISTRY-}desafio.web
     build:
       context: src/AndreGutierrez.Web/
@@ -10,7 +10,6 @@ services:
       NODE_ENV: production
     ports:
       - 5000:80
-
   desafio-api:
     image: ${DOCKER_REGISTRY-}desafio.api
     depends_on:
@@ -23,7 +22,6 @@ services:
       - DEFAULT_CONNECTION=Data Source=sqldata,1433;Initial Catalog=master;Persist Security Info=True;TrustServerCertificate=true;User ID=sa;Password=Stefanini@123
     ports:
       - "5100:80"
-      
   sqldata:
     image: mcr.microsoft.com/mssql/server:2017-latest
     environment:
