@@ -1,5 +1,3 @@
-using System.Reflection;
-using AndreGutierrez.Application.UFs.Queries;
 using AndreGutierrez.Infra.Data;
 using Example.Infra.CrossCutting.IoC;
 using MediatR;
