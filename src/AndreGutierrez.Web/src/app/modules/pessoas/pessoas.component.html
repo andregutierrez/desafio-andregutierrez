@@ -76,7 +76,7 @@
             <form class="example-form">
               <mat-form-field class="example-full-width"  >
                 <mat-label>Nome da Pessoa</mat-label>
-                <input id="pessoa-nome" matInput placeholder="Ex. Curitiba" [(ngModel)]="selectedPessoa.nome"  name="nome" >
+                <input id="pessoa-nome" matInput placeholder="Ex. André" [(ngModel)]="selectedPessoa.nome"  name="nome" >
               </mat-form-field>
             </form>
             <form class="example-form">
@@ -95,7 +95,7 @@
           
 
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>UF</mat-label>
+            <mat-label>Cidade / Estado</mat-label>
             <mat-select [(ngModel)]="selectedPessoa.cidade.id" placeholder="Ex. cidade onde mora" name="cidadeId">
               <mat-option *ngFor="let cidade of cidades" [value]="cidade.id" >
                 {{cidade.nome}} / {{cidade.uf}}
