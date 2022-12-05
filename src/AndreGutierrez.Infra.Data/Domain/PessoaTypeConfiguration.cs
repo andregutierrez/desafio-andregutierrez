@@ -25,6 +25,7 @@ namespace SampleProject.Infrastructure.Domain.Customers
             
             builder.HasOne(o => o.Cidade)
                 .WithMany()
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
 
         }
