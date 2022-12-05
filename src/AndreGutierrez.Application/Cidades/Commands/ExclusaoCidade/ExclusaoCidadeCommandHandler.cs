@@ -3,6 +3,7 @@ using AndreGutierrez.Application.Common.Commands;
 using AndreGutierrez.Application.Common.Validation;
 using AndreGutierrez.Domain.Cidades;
 using AndreGutierrez.Domain.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace AndreGutierrez.Application.Cidades.Commands;
 
@@ -24,7 +25,17 @@ public class ExclusaoCidadeCommandHandler: ICommandHandler<ExclusaoCidadeCommand
             throw new NotFoundCommandException("A cidade não foi encontrada", $"Nehum registro foi retornado para o identificador {request.CidadeId}");
             
         _cidadeRepository.Delete(cidade);
-        await _unitOfWork.CommitAsync();
+
+
+        try
+        {
+            await _unitOfWork.CommitAsync();
+        }
+        catch(DbUpdateException)
+        {
+            throw new InvalidCommandException("A cidade não foi excluída", $"Possívelmente ela está vinculada a uma pessoa, identificador da cidade {request.CidadeId}");
+        }
+        
         
         return (CidadeDto)cidade;
     }

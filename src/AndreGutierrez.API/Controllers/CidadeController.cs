@@ -113,6 +113,10 @@ public class CidadeController : BaseController
         {
             return BadRequest(new ResponseObject<CidadeDto>(ex));
         }
+        catch(InvalidCommandException ex)
+        {
+            return BadRequest(new ResponseObject<CidadeDto>(ex));
+        }
         catch(NotFoundCommandException ex)
         {
             return NotFound(new ResponseObject<CidadeDto>(ex));

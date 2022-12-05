@@ -21,6 +21,10 @@ namespace AndreGutierrez.API.Common
         {
         }
 
+        public ResponseObject(InvalidCommandException error) : base(error)
+        {
+        }
+
         public ResponseObject(NotFoundCommandException error) : base(error)
         {
         }

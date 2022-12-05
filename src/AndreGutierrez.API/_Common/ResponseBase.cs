@@ -25,6 +25,12 @@ namespace AndreGutierrez.API.Common
             Success = false;
         }
 
+        public ResponseBase(InvalidCommandException error)
+        {
+            Error = new { Message = error.Message, Details = error.Details };
+            Success = false;
+        }
+
         public ResponseBase(NotFoundCommandException error)
         {
             Error = new { Message = error.Message, Details = error.Details };
